@@ -1,2 +1,7 @@
-# online-shop
-online shop with node, react, mongo and express.
+### online-shop required packages
+## backend
+# npm i express dotenv mongoose 
+# npm i nodemon --save-dev
+
+
+## frontend

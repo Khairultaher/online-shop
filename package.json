@@ -1,0 +1,29 @@
+{
+  "name": "online-shop",
+  "version": "1.0.0",
+  "description": "online shop using MERN",
+  "main": "server.js",
+  "scripts": {
+    "start": "node backend/server.js",
+    "dev": "SET NODE_ENV=DEVELOPMENT& nodemon backend/server",
+    "prod": "SET NODE_ENV=PRODUCTION& nodemon backend/server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Khairultaher/online-shop.git"
+  },
+  "author": "khairul alam",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Khairultaher/online-shop/issues"
+  },
+  "homepage": "https://github.com/Khairultaher/online-shop#readme",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.11.9"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.6"
+  }
+}
