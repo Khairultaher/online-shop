@@ -1,0 +1,107 @@
+[
+  {
+    "name": "sanDisk 128 GB Memory Card",
+    "price": 1.0,
+    "description": "sanDisk 128 GB Memory Card",
+    "ratings": 4.5,
+    "images": [
+      {
+        "public_id": "123",
+        "url": "https://github.com/Khairultaher/online-shop/blob/main/resources/iphone-624709_960_720.jpg"
+      },
+      {
+        "public_id": "124",
+        "url": "https://github.com/Khairultaher/online-shop/blob/main/resources/iphone-624709_960_720.jpg"
+      }
+    ],
+    "category": "Electronics",
+    "seller": "Ebay",
+    "stock": 50,
+    "numOfReviews": 10,
+    "reviews": []
+  },
+  {
+    "name": "Apple Laptop",
+    "price": 1.0,
+    "description": "sanDisk 128 GB Memory Card",
+    "ratings": 4.5,
+    "images": [
+      {
+        "public_id": "123",
+        "url": "https://github.com/Khairultaher/online-shop/blob/main/resources/iphone-624709_960_720.jpg"
+      },
+      {
+        "public_id": "124",
+        "url": "https://github.com/Khairultaher/online-shop/blob/main/resources/iphone-624709_960_720.jpg"
+      }
+    ],
+    "category": "Electronics",
+    "seller": "Ebay",
+    "stock": 50,
+    "numOfReviews": 10,
+    "reviews": []
+  },
+  {
+    "name": "Orange Laptop",
+    "price": 1.0,
+    "description": "sanDisk 128 GB Memory Card",
+    "ratings": 4.5,
+    "images": [
+      {
+        "public_id": "123",
+        "url": "https://github.com/Khairultaher/online-shop/blob/main/resources/iphone-624709_960_720.jpg"
+      },
+      {
+        "public_id": "124",
+        "url": "https://github.com/Khairultaher/online-shop/blob/main/resources/iphone-624709_960_720.jpg"
+      }
+    ],
+    "category": "Electronics",
+    "seller": "Ebay",
+    "stock": 50,
+    "numOfReviews": 10,
+    "reviews": []
+  },
+  {
+    "name": "sMango Laptop",
+    "price": 1.0,
+    "description": "sanDisk 128 GB Memory Card",
+    "ratings": 4.5,
+    "images": [
+      {
+        "public_id": "123",
+        "url": "https://github.com/Khairultaher/online-shop/blob/main/resources/iphone-624709_960_720.jpg"
+      },
+      {
+        "public_id": "124",
+        "url": "https://github.com/Khairultaher/online-shop/blob/main/resources/iphone-624709_960_720.jpg"
+      }
+    ],
+    "category": "Electronics",
+    "seller": "Ebay",
+    "stock": 50,
+    "numOfReviews": 10,
+    "reviews": []
+  },
+  {
+    "name": "Dowel Laptop",
+    "price": 1.0,
+    "description": "sanDisk 128 GB Memory Card",
+    "ratings": 4.5,
+    "images": [
+      {
+        "public_id": "123",
+        "url": "https://github.com/Khairultaher/online-shop/blob/main/resources/iphone-624709_960_720.jpg"
+      },
+      {
+        "public_id": "124",
+        "url": "https://github.com/Khairultaher/online-shop/blob/main/resources/iphone-624709_960_720.jpg"
+      }
+    ],
+    "category": "Electronics",
+    "seller": "Ebay",
+    "stock": 50,
+    "numOfReviews": 10,
+    "reviews": []
+  }
+]

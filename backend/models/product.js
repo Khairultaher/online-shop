@@ -1,8 +1,8 @@
 const mongoose = require('mongoose')
 
-const product = new mongoose.Schema({
+const productSchema = new mongoose.Schema({
   name: {
-    type: string,
+    type: String,
     required: [true, 'name is required'],
     trim: true,
     maxlength: [100, 'name must not exit 100'],
@@ -14,7 +14,7 @@ const product = new mongoose.Schema({
     default: 0.0,
   },
   description: {
-    type: string,
+    type: String,
     required: [true, 'description is required'],
   },
   ratings: {
@@ -24,18 +24,18 @@ const product = new mongoose.Schema({
   images: [
     {
       public_id: {
-        type: string,
+        type: String,
         required: true,
       },
       url: {
-        type: string,
+        type: String,
         required: true,
       },
     },
   ],
   category: {
-    type: string,
-    required: [true, 'name is required'],
+    type: String,
+    required: [true, 'category is required'],
     enum: {
       values: [
         'Electronics',
@@ -57,7 +57,7 @@ const product = new mongoose.Schema({
     },
   },
   seller: {
-    type: string,
+    type: String,
     required: [true, 'enter product seller'],
   },
   stock: {
@@ -73,7 +73,7 @@ const product = new mongoose.Schema({
   reviews: [
     {
       name: {
-        type: string,
+        type: String,
         required: true,
       },
       rating: {
@@ -81,7 +81,7 @@ const product = new mongoose.Schema({
         required: true,
       },
       comment: {
-        type: string,
+        type: String,
         required: true,
       },
     },
@@ -92,4 +92,4 @@ const product = new mongoose.Schema({
   },
 })
 
-module.exports = mongoose.model(product)
+module.exports = mongoose.model('product', productSchema)
