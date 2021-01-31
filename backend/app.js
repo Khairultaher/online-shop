@@ -8,11 +8,13 @@ app.use(express.json())
 app.use(cookieParser())
 
 // import all routes
-const products = require('./routes/productRoute')
 const auth = require('./routes/authRoute')
+const product = require('./routes/productRoute')
+const order = require('./routes/orderRoute')
 
-app.use('/api/v1', products)
 app.use('/api/v1', auth)
+app.use('/api/v1', product)
+app.use('/api/v1', order)
 
 // middlewares to handle errors
 app.use(errorMiddleware)
