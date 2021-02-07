@@ -7,3 +7,6 @@
 
 
 ## frontend
+# npx create-react-app .
+# nmp i axios react-alert react-alert-template-basic react-bootstrap react-helmet react-redux redux redux-thunk redux-devtools-extension react-router-dom
+# 
