@@ -14,7 +14,7 @@ const {
   deleteProductReview,
 } = require('../controllers/productController')
 
-router.route('/products').get(isAuthenticateuser, getProducts)
+router.route('/products').get(getProducts) //isAuthenticateuser
 router.route('/product/:id').get(getProductById)
 router
   .route('/admin/product/add')
