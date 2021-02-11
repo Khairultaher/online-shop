@@ -27,7 +27,7 @@ const Home = () => {
       ) : (
         <Fragment>
           <MetaData title={'Buy Best Products'}></MetaData>
-          <h4 id='products_heading'>Latest Products</h4>
+          {/* <h6 id='products_heading'>Latest Products</h6> */}
           <section id='products' className='container mt-5'>
             <div className='row'>
               {products &&
