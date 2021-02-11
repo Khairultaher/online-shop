@@ -11,15 +11,16 @@ export const getProducts = () => async (dispatch) => {
   try {
     dispatch({ type: ALL_PRODUCT_REQUEST })
     const data = await axios.get('/api/v1/products')
-    debugger
+    //debugger
     dispatch({
       type: ALL_PRODUCT_SUCCES,
       payload: data.data,
     })
   } catch (error) {
+    debugger
     dispatch({
       type: ALL_PRODUCT_FAIL,
-      payload: error.response.data.message,
+      payload: error.response.data.errorMessage,
     })
   }
 }
