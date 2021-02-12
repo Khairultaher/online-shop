@@ -1,12 +1,12 @@
 import React, { Fragment, useEffect } from 'react'
-//import MetaData from '../layout/metaData'
+import MetaData from '../layout/MetaData'
 import { useDispatch, useSelector } from 'react-redux'
 import { getProductDetail, clearErrors } from '../../actions/productAction'
 import Loader from '../layout/Loader'
 import { useAlert } from 'react-alert'
 import { Carousel, CarouselItem } from 'react-bootstrap'
 
-const ProductDetail = ({match}) => {
+const ProductDetail = ({ match }) => {
   const alert = useAlert()
   const dispatch = useDispatch()
   const { loading, error, product } = useSelector(
@@ -28,6 +28,7 @@ const ProductDetail = ({match}) => {
         <Loader></Loader>
       ) : (
         <Fragment>
+          <MetaData title={product.name}></MetaData>
           <div className='container container-fluid'>
             <div className='row f-flex justify-content-around'>
               <div className='col-12 col-lg-5 img-fluid' id='product_image'>
