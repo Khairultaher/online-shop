@@ -1,129 +1,124 @@
-const Product = require('../models/product')
-const Order = require('../models/order')
-const ErrorHandler = require('../utils/errorHandler')
-const catchAsyncErrors = require('../middlewares/catchAsuncErrors')
-const ApiFeatures = require('../utils/apiFeatures')
+const Order = require('../models/order');
+const Product = require('../models/product');
 
-// create new product
-exports.addOrder = catchAsyncErrors(async (req, res, next) => {
-  const {
-    orderItems,
-    shippingInfo,
-    itemsPrice,
-    taxPrice,
-    shippingPrice,
-    totalPrice,
-    paymentInfo,
-  } = req.body
+const ErrorHandler = require('../utils/errorHandler');
+const catchAsyncErrors = require('../middlewares/catchAsyncErrors');
 
-  const order = await Order.create({
-    orderItems,
-    shippingInfo,
-    itemsPrice,
-    taxPrice,
-    shippingPrice,
-    totalPrice,
-    paymentInfo,
-    paidAt: Date.now,
-    user: req.user._id,
-  })
-  res.status(201).json({
-    success: true,
-    order,
-  })
-})
-// get all products
-exports.getOrders = catchAsyncErrors(async (req, res, next) => {
-  const resPerPage = 1
-  const orderCount = await Order.countDocuments()
-  const apiFeatures = new ApiFeatures(Order.find(), req.query)
-    .search()
-    .filter()
-    .pagination(resPerPage)
-  const orders = await apiFeatures.query
+// Create a new order   =>  /api/v1/order/new
+exports.newOrder = catchAsyncErrors(async (req, res, next) => {
+    const {
+        orderItems,
+        shippingInfo,
+        itemsPrice,
+        taxPrice,
+        shippingPrice,
+        totalPrice,
+        paymentInfo
 
-  let totalAmount = 0
-  orders.forEach((element) => {
-    totalAmount += element.totalPrice
-  })
-  res.status(200).json({
-    success: true,
-    count: orders.length,
-    orderCount,
-    orders,
-    totalAmount,
-  })
+    } = req.body;
+
+    const order = await Order.create({
+        orderItems,
+        shippingInfo,
+        itemsPrice,
+        taxPrice,
+        shippingPrice,
+        totalPrice,
+        paymentInfo,
+        paidAt: Date.now(),
+        user: req.user._id
+    })
+
+    res.status(200).json({
+        success: true,
+        order
+    })
 })
 
-// get loggged in user's order
-exports.getMyOrders = catchAsyncErrors(async (req, res, next) => {
-  const orders = await Order.find({ user: req.user.id })
 
-  if (!order) {
-    return next(new ErrorHandler('order not found', 404))
-  }
+// Get single order   =>   /api/v1/order/:id
+exports.getSingleOrder = catchAsyncErrors(async (req, res, next) => {
+    const order = await Order.findById(req.params.id).populate('user', 'name email')
 
-  res.status(200).json({
-    success: true,
-    orders,
-  })
+    if (!order) {
+        return next(new ErrorHandler('No Order found with this ID', 404))
+    }
+
+    res.status(200).json({
+        success: true,
+        order
+    })
 })
 
-// get single product
-exports.getOrderById = catchAsyncErrors(async (req, res, next) => {
-  const order = await Order.findById(req.params.id).populate('user', 'email')
+// Get logged in user orders   =>   /api/v1/orders/me
+exports.myOrders = catchAsyncErrors(async (req, res, next) => {
+    const orders = await Order.find({ user: req.user.id })
 
-  if (!order) {
-    return next(new ErrorHandler('order not found', 404))
-  }
-
-  res.status(200).json({
-    success: true,
-    product,
-  })
+    res.status(200).json({
+        success: true,
+        orders
+    })
 })
 
-// update product
+
+// Get all orders - ADMIN  =>   /api/v1/admin/orders/
+exports.allOrders = catchAsyncErrors(async (req, res, next) => {
+    const orders = await Order.find()
+
+    let totalAmount = 0;
+
+    orders.forEach(order => {
+        totalAmount += order.totalPrice
+    })
+
+    res.status(200).json({
+        success: true,
+        totalAmount,
+        orders
+    })
+})
+
+// Update / Process order - ADMIN  =>   /api/v1/admin/order/:id
 exports.updateOrder = catchAsyncErrors(async (req, res, next) => {
-  let order = await Order.findById(req.params.id)
+    const order = await Order.findById(req.params.id)
 
-  if (order.orderStatus === 'Delivered') {
-    return next(new ErrorHandler('already delivered', 404))
-  }
+    if (order.orderStatus === 'Delivered') {
+        return next(new ErrorHandler('You have already delivered this order', 400))
+    }
 
-  order.orderItems.forEach(async (item) => {
-    await updateStock(item.product, item.quantity)
-  })
-  order.orderStatus = req.body.status
-  order.deliveredAt = Date.now
-  order.save()
-  res.status(200).json({
-    success: true,
-    order,
-  })
-})
+    order.orderItems.forEach(async item => {
+        await updateStock(item.product, item.quantity)
+    })
 
-// delete product
-exports.deleteOrder = catchAsyncErrors(async (req, res, next) => {
-  let order = await Order.findById(req.params.id)
+    order.orderStatus = req.body.status,
+        order.deliveredAt = Date.now()
 
-  if (!order) {
-    return next(new ErrorHandler('Order not found', 404))
-    // return res.status(401).json({
-    //   success: false,
-    //   message: 'Product not found',
-    // })
-  }
-  await order.remove()
+    await order.save()
 
-  res.status(200).json({
-    success: true,
-    message: 'Order is deleted',
-  })
+    res.status(200).json({
+        success: true,
+    })
 })
 
 async function updateStock(id, quantity) {
-  const product = await Product.findById(id)
-  product.stock = product.stock - quantity
-  await product.save({validateBeforeSave: false})
+    const product = await Product.findById(id);
+
+    product.stock = product.stock - quantity;
+
+    await product.save({ validateBeforeSave: false })
 }
+
+// Delete order   =>   /api/v1/admin/order/:id
+exports.deleteOrder = catchAsyncErrors(async (req, res, next) => {
+    const order = await Order.findById(req.params.id)
+
+    if (!order) {
+        return next(new ErrorHandler('No Order found with this ID', 404))
+    }
+
+    await order.remove()
+
+    res.status(200).json({
+        success: true
+    })
+})

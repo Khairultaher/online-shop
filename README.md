@@ -1,20 +1,32 @@
-### online-shop required packages
+# ShopIT E-commerce Project
 
-## backend
+> Complete E-commerce site built with Node.js, React, Redux, Express, MongoDB
 
-# npm i express dotenv mongoose
+More about this project and course on Udemy. Course Name: [MERN Stack Full Ecommerce Site - Using React, Redux, Node.j](https://www.udemy.com/course/3678044)
 
-# npm i nodemon --save-dev
+### Env Variables
 
-# npm i bcryptjs jsonwebtoken validator nodemailer
+Create a .env file in the backend folder in config folder with name config.env
+Add your variables in that as shown in the course.
 
-# npm i cookie-parser body-parser
+### Install Dependencies (Frontend)
 
-## frontend
+```
+cd frontend
+npm i
+```
 
-# npx create-react-app .
+### Install Dependencies (Backend)
 
-# nmp i axios react-alert react-alert-template-basic react-bootstrap react-helmet react-redux redux redux-thunk redux-devtools-extension react-router-dom
+```
+npm i
+```
 
-# npm i react-js-pagination
-# npm i rc-slider
+### Seed Database
+
+Use the following commeand to put some dummy products in that database.
+Run it in the root folder.
+
+```
+npm run seeder
+```

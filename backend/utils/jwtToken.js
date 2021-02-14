@@ -1,21 +1,20 @@
-// crate and send token and save in cookie
-
+// Create and send token and save in the cookie.
 const sendToken = (user, statusCode, res) => {
-  //get/create token
+  // Create Jwt token
   const token = user.getJwtToken()
 
-  // option for cookie
+  // Options for cookie
   const options = {
     expires: new Date(
-      Date.now + process.env.COOKIE_EXPIRE_TIME * 24 * 60 * 60 * 1000
+      Date.now() + process.env.COOKIE_EXPIRE_TIME * 24 * 60 * 60 * 1000
     ),
     httpOnly: true,
   }
 
   res.status(statusCode).cookie('token', token, options).json({
     success: true,
-    user,
     token,
+    user,
   })
 }
 
