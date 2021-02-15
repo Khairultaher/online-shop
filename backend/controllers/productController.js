@@ -45,8 +45,8 @@ exports.getProducts = catchAsyncErrors(async(req, res, next) => {
 
     const resPerPage = 8;
     const productsCount = await Product.countDocuments();
-
-    const apiFeatures = new APIFeatures(Product.find(), req.query)
+    const sort = { _id: -1 };
+    const apiFeatures = new APIFeatures(Product.find().sort(sort), req.query)
         .search()
         .filter()
 
