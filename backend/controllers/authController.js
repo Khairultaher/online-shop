@@ -9,8 +9,8 @@ const crypto = require('crypto');
 const cloudinary = require('cloudinary');
 
 // Register a user   => /api/v1/register
-exports.registerUser = catchAsyncErrors(async (req, res, next) => {
-
+exports.registerUser = catchAsyncErrors(async(req, res, next) => {
+    //console.log(req.body.name)
     const result = await cloudinary.v2.uploader.upload(req.body.avatar, {
         folder: 'avatars',
         width: 150,
@@ -34,7 +34,7 @@ exports.registerUser = catchAsyncErrors(async (req, res, next) => {
 })
 
 // Login User  =>  /a[i/v1/login
-exports.loginUser = catchAsyncErrors(async (req, res, next) => {
+exports.loginUser = catchAsyncErrors(async(req, res, next) => {
     const { email, password } = req.body;
 
     // Checks if email and password is entered by user
@@ -60,7 +60,7 @@ exports.loginUser = catchAsyncErrors(async (req, res, next) => {
 })
 
 // Forgot Password   =>  /api/v1/password/forgot
-exports.forgotPassword = catchAsyncErrors(async (req, res, next) => {
+exports.forgotPassword = catchAsyncErrors(async(req, res, next) => {
 
     const user = await User.findOne({ email: req.body.email });
 
@@ -82,7 +82,7 @@ exports.forgotPassword = catchAsyncErrors(async (req, res, next) => {
 
         await sendEmail({
             email: user.email,
-            subject: 'ShopIT Password Recovery',
+            subject: 'online-shop Password Recovery',
             message
         })
 
@@ -103,7 +103,7 @@ exports.forgotPassword = catchAsyncErrors(async (req, res, next) => {
 })
 
 // Reset Password   =>  /api/v1/password/reset/:token
-exports.resetPassword = catchAsyncErrors(async (req, res, next) => {
+exports.resetPassword = catchAsyncErrors(async(req, res, next) => {
 
     // Hash URL token
     const resetPasswordToken = crypto.createHash('sha256').update(req.params.token).digest('hex')
@@ -135,7 +135,7 @@ exports.resetPassword = catchAsyncErrors(async (req, res, next) => {
 
 
 // Get currently logged in user details   =>   /api/v1/me
-exports.getUserProfile = catchAsyncErrors(async (req, res, next) => {
+exports.getUserProfile = catchAsyncErrors(async(req, res, next) => {
     const user = await User.findById(req.user.id);
 
     res.status(200).json({
@@ -146,7 +146,7 @@ exports.getUserProfile = catchAsyncErrors(async (req, res, next) => {
 
 
 // Update / Change password   =>  /api/v1/password/update
-exports.updatePassword = catchAsyncErrors(async (req, res, next) => {
+exports.updatePassword = catchAsyncErrors(async(req, res, next) => {
     const user = await User.findById(req.user.id).select('+password');
 
     // Check previous user password
@@ -164,7 +164,7 @@ exports.updatePassword = catchAsyncErrors(async (req, res, next) => {
 
 
 // Update user profile   =>   /api/v1/me/update
-exports.updateProfile = catchAsyncErrors(async (req, res, next) => {
+exports.updateProfile = catchAsyncErrors(async(req, res, next) => {
     const newUserData = {
         name: req.body.name,
         email: req.body.email
@@ -202,7 +202,7 @@ exports.updateProfile = catchAsyncErrors(async (req, res, next) => {
 
 
 // Logout user   =>   /api/v1/logout
-exports.logout = catchAsyncErrors(async (req, res, next) => {
+exports.logout = catchAsyncErrors(async(req, res, next) => {
     res.cookie('token', null, {
         expires: new Date(Date.now()),
         httpOnly: true
@@ -217,7 +217,7 @@ exports.logout = catchAsyncErrors(async (req, res, next) => {
 // Admin Routes
 
 // Get all users   =>   /api/v1/admin/users
-exports.allUsers = catchAsyncErrors(async (req, res, next) => {
+exports.allUsers = catchAsyncErrors(async(req, res, next) => {
     const users = await User.find();
 
     res.status(200).json({
@@ -228,7 +228,7 @@ exports.allUsers = catchAsyncErrors(async (req, res, next) => {
 
 
 // Get user details   =>   /api/v1/admin/user/:id
-exports.getUserDetails = catchAsyncErrors(async (req, res, next) => {
+exports.getUserDetails = catchAsyncErrors(async(req, res, next) => {
     const user = await User.findById(req.params.id);
 
     if (!user) {
@@ -242,7 +242,7 @@ exports.getUserDetails = catchAsyncErrors(async (req, res, next) => {
 })
 
 // Update user profile   =>   /api/v1/admin/user/:id
-exports.updateUser = catchAsyncErrors(async (req, res, next) => {
+exports.updateUser = catchAsyncErrors(async(req, res, next) => {
     const newUserData = {
         name: req.body.name,
         email: req.body.email,
@@ -261,7 +261,7 @@ exports.updateUser = catchAsyncErrors(async (req, res, next) => {
 })
 
 // Delete user   =>   /api/v1/admin/user/:id
-exports.deleteUser = catchAsyncErrors(async (req, res, next) => {
+exports.deleteUser = catchAsyncErrors(async(req, res, next) => {
     const user = await User.findById(req.params.id);
 
     if (!user) {
