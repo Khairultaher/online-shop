@@ -55,8 +55,9 @@ npm i rc-slider
 ```
 heroku git:remote -a onlineshop101
 
-git add .
 git commit -m "First commit"
 git push heroku main
 
+
+heroku logs
 ```
