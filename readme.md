@@ -50,3 +50,13 @@ npm i react-js-pagination
 npm i rc-slider
 
 ```
+
+## Deploy to Heroku
+```
+heroku git:remote -a onlineshop101
+
+git add .
+git commit -m "First commit"
+git push heroku main
+
+```
