@@ -53,7 +53,7 @@ npm i rc-slider
 
 ## Deploy to Heroku
 ```
-heroku git:remote -a onlineshop101
+heroku git:remote -a nameOfHerokuApp
 git add .
 git commit -m "First commit"
 git push -f heroku main
