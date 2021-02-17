@@ -12,6 +12,7 @@ Add your variables in that as shown in the course.
 ```
 cd frontend
 npm i
+build: npm run-script build
 ```
 
 ### Install Dependencies (Backend)
