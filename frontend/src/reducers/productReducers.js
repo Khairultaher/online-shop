@@ -62,11 +62,7 @@ export const productsReducer = (state = { products: [] }, action) => {
     case ALL_PRODUCTS_FAIL:
     case ADMIN_PRODUCTS_FAIL:
       const payload = JSON.parse(localStorage.getItem('products'))
-      debugger
       return {
-        // loading: false,
-        // error: action.payload,
-
         loading: false,
         products: payload.products,
         productsCount: payload.productsCount,
